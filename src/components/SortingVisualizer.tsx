@@ -177,13 +177,21 @@ import {
 } from "../utils/sortingAlgorithms";
 import AlgorithmSidebar from "../components/AlgorithmSidebar";
 
+import type { AlgorithmKey } from "../components/AlgorithmSidebar";
+
+
 const SortingVisualizer: React.FC = () => {
   const [array, setArray] = useState<number[]>([]);
   const [arraySize, setArraySize] = useState<number>(30);
   const [highlightedIndices, setHighlightedIndices] = useState<number[]>([]);
   const [speed, setSpeed] = useState<number>(80);
   const [isSorting, setIsSorting] = useState<boolean>(false);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("Bubble Sort");
+
+  // const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("Bubble Sort");
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<AlgorithmKey>("Bubble Sort");
+
+
+
   const [showSidebar, setShowSidebar] = useState<boolean>(true);
 
   const generateArray = () => {
@@ -278,7 +286,7 @@ const SortingVisualizer: React.FC = () => {
               <select
                 className="p-1.5 text-l font-bold rounded text-[#4e6dd4] border-2"
                 value={selectedAlgorithm}
-                onChange={(e) => setSelectedAlgorithm(e.target.value)}
+                onChange={(e) => setSelectedAlgorithm(e.target.value as AlgorithmKey)}
               >
                 <option>Bubble Sort</option>
                 <option>Insertion Sort</option>

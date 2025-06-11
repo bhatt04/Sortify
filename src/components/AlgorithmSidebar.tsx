@@ -45,13 +45,40 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface Props {
-  algorithm: string;
-  show: boolean;
-  onClose: () => void;
-}
+// type AlgorithmKey = "Bubble Sort" | "Insertion Sort" | "Selection Sort" | "Merge Sort" | "Quick Sort" | "Heap Sort";
 
-const data = {
+
+// interface Props {
+//   algorithm: string;
+//   show: boolean;
+//   onClose: () => void;
+// }
+
+
+export type AlgorithmKey =
+  | "Bubble Sort"
+  | "Insertion Sort"
+  | "Selection Sort"
+  | "Merge Sort"
+  | "Quick Sort"
+  | "Heap Sort";
+
+
+
+
+const data: Record<AlgorithmKey, {
+  overview: string;
+  characteristics: string[];
+  steps: string[];
+  complexity: string[];
+  code: {
+    cpp: string;
+    c: string;
+    python: string;
+  };
+}> = {
+
+    // BUBBLE SORT
   "Bubble Sort": {
     overview: "Compares adjacent elements and swaps them if they're in the wrong order. Repeats this process until the array is sorted.",
     characteristics: [
@@ -95,6 +122,8 @@ const data = {
         arr[j], arr[j + 1] = arr[j + 1], arr[j]`,
     },
   },
+
+  // INSERTION SORT
 
   "Insertion Sort": {
     overview: "Builds the sorted array one element at a time by inserting elements at the correct position.",
@@ -147,6 +176,8 @@ const data = {
     },
   },
 
+  // SELECTION SORT
+
   "Selection Sort": {
     overview: "Finds the minimum element from unsorted part and places it at the beginning. Repeats until sorted.",
     characteristics: [
@@ -195,6 +226,8 @@ const data = {
     arr[i], arr[min_idx] = arr[min_idx], arr[i]`,
     },
   },
+
+  // MERGE SORT
 
   "Merge Sort": {
     overview: "A divide-and-conquer algorithm that divides the array, sorts each half, and merges them together.",
@@ -280,6 +313,8 @@ void mergeSort(int arr[], int l, int r) {
     },
   },
 
+  // QUICK SORT
+
   "Quick Sort": {
     overview: "A fast divide-and-conquer algorithm that picks a pivot and partitions the array around it.",
     characteristics: [
@@ -344,6 +379,8 @@ void quickSort(int arr[], int low, int high) {
   return quick_sort(left) + [pivot] + quick_sort(right)`,
     },
   },
+
+  // HEAP SORT
 
   "Heap Sort": {
     overview: "A comparison-based sorting using a binary heap to build a max heap and extract the largest element.",
@@ -416,8 +453,15 @@ def heap_sort(arr) :
     arr[i], arr[0] = arr[0], arr[i]
     heapify(arr, i, 0)`,
     },
-  },
+  }as const,
 };
+
+
+interface Props {
+  algorithm: AlgorithmKey;
+  show: boolean;
+  onClose: () => void;
+}
 
 const AlgorithmSidebar: React.FC<Props> = ({ algorithm, show, onClose }) => {
   const [lang, setLang] = useState<"cpp" | "c" | "python">("cpp");
@@ -435,7 +479,7 @@ const AlgorithmSidebar: React.FC<Props> = ({ algorithm, show, onClose }) => {
           className="fixed top-1 left-1 h-[99vh] w-[25%] bg-gray-800 p-6 shadow-lg z-20 rounded-xl overflow-y-auto"
         >
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-[#E0B0FF]">{algorithm}</h2>
+            <h2 className="text-2xl font-bold text-[#c6bcf7]">{algorithm}</h2>
             <button
               onClick={onClose}
               className="text-gray-800 bg-[#d4cdfa] hover:bg-[#C58CEB] hover:text-white px-3 py-1 rounded"
