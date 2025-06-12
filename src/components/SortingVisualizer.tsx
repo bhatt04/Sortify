@@ -1,4 +1,3 @@
-
 // SORTING PAGE WITHOUT SIDE PANEL
 
 // import React, { useEffect, useState } from 'react';
@@ -85,8 +84,7 @@
 //             <select
 //               className="p-1.5 text-l font-bold rounded text-[#4e6dd4] border-2 custom-scroll"
 //               value={selectedAlgorithm}
-//               onChange={(e) => setSelectedAlgorithm(e.target.value)}
-//             >
+//               onChange={(e) => setSelectedAlgorithm(e.target.value)} >
 //               <option>Bubble Sort</option>
 //               <option>Insertion Sort</option>
 //               <option>Selection Sort</option>
@@ -107,9 +105,7 @@
 //                 value={speed}
 //                 onChange={(e) => setSpeed(Number(e.target.value))}
 //                 className="accent-[#F56A6E]"
-//               />
-//             </div>
-//           </div>
+//               /> </div> </div>
 //           <div className="text-black font-medium">
 //             <label className="mr-2">Size:</label>
 //             <span className="text-m text-center">{arraySize} bars</span>
@@ -123,22 +119,18 @@
 //                 onChange={(e) => setArraySize(Number(e.target.value))}
 //                 className="accent-[#F56A6E]"
 //               />
-//             </div>
-//           </div>
-//         </div>
+//             </div>  </div>  </div> 
 //         <div className="flex flex-wrap justify-center items-center gap-[20px] mt-4">
 //           <button
 //             onClick={generateArray}
 //             className="bg-lime-500 text-white px-4 py-2 rounded hover:bg-lime-600 font-semibold"
-//             disabled={isSorting}
-//           >
+//             disabled={isSorting}>
 //             Generate New Array
 //           </button>
 //           <button
 //             onClick={handleSort}
 //             className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 font-semibold"
-//             disabled={isSorting}
-//           >
+//             disabled={isSorting}>
 //             Start Sort
 //           </button>
 //         </div>
@@ -155,16 +147,15 @@
 //               style={{ height: `${value * 3.8}px` }}
 //             />
 //           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+//         </div> </div> </div>
+//   ); };
 // export default SortingVisualizer;
 
 
 
 
+
+import { motion } from "framer-motion";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -189,8 +180,6 @@ const SortingVisualizer: React.FC = () => {
 
   // const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("Bubble Sort");
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<AlgorithmKey>("Bubble Sort");
-
-
 
   const [showSidebar, setShowSidebar] = useState<boolean>(true);
 
@@ -250,6 +239,17 @@ const SortingVisualizer: React.FC = () => {
   };
 
   return (
+
+
+<motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-[#F2EFFE] ..."
+    >
+
+
     <div className="relative w-screen h-screen overflow-hidden bg-[#F6E9FF]">
       {/* Sidebar with animation */}
       <AlgorithmSidebar
@@ -361,6 +361,11 @@ const SortingVisualizer: React.FC = () => {
         </div>
       </div>
     </div>
+
+
+</motion.div>
+
+
   );
 };
 

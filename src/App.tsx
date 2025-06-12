@@ -1,34 +1,27 @@
-// import React from 'react';
-// import SortingVisualizer from './components/SortingVisualizer';
-// // import { Route, Routes } from 'react-router-dom';
-// // import OpeningScreen from './components/OpeningScreen';
-
-// const App: React.FC = () => {
-//   return (
-//   <>
-//       <SortingVisualizer />
-//   </>
-//   );
-// };
-
-// export default App;
-
-
-
-
-
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import SortingVisualizer from './components/SortingVisualizer';
 import OpeningScreen from './components/OpeningScreen';
+import { AnimatePresence } from 'framer-motion';
+
+
+const AnimatedRoutes: React.FC = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<OpeningScreen />} />
+        <Route path="/sort" element={<SortingVisualizer />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<OpeningScreen />} />
-        <Route path="/sort" element={<SortingVisualizer />} />
-      </Routes>
+      <AnimatedRoutes />
     </Router>
   );
 };

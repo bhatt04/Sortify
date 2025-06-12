@@ -45,15 +45,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// type AlgorithmKey = "Bubble Sort" | "Insertion Sort" | "Selection Sort" | "Merge Sort" | "Quick Sort" | "Heap Sort";
-
-
-// interface Props {
-//   algorithm: string;
-//   show: boolean;
-//   onClose: () => void;
-// }
-
 
 export type AlgorithmKey =
   | "Bubble Sort"
@@ -62,9 +53,6 @@ export type AlgorithmKey =
   | "Merge Sort"
   | "Quick Sort"
   | "Heap Sort";
-
-
-
 
 const data: Record<AlgorithmKey, {
   overview: string;
@@ -475,7 +463,7 @@ const AlgorithmSidebar: React.FC<Props> = ({ algorithm, show, onClose }) => {
           initial={{ x: -300, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -300, opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.6 }}
           className="fixed top-1 left-1 h-[99vh] w-[25%] bg-gray-800 p-6 shadow-lg z-20 rounded-xl overflow-y-auto"
         >
           <div className="flex justify-between items-center mb-4">
