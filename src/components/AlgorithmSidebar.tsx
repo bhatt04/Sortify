@@ -1,50 +1,5 @@
-// import React from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-// interface Props {
-//   algorithm: string;
-//   show: boolean;
-//   onClose: () => void;
-// }
-// const descriptions: Record<string, string> = {
-//   "Bubble Sort": "Compares adjacent elements and swaps them if they're in the wrong order. Repeats this process until the array is sorted.",
-//   "Quick Sort": "Divide and conquer algorithm using a pivot to partition the array.",
-//   "Merge Sort": "Divides, sorts, and merges arrays. Very efficient and stable.",
-// };
-// const AlgorithmSidebar: React.FC<Props> = ({ algorithm, show, onClose }) => {
-//   return (
-//     <AnimatePresence>
-//       {show && (
-//         <motion.div
-//           initial={{ x: -300, opacity: 0 }}
-//           animate={{ x: 0, opacity: 1 }}
-//           exit={{ x: -300, opacity: 0 }}
-//           transition={{ duration: 0.3 }}
-//           className="fixed top-1 left-1 h-full text-sm w-[28%] bg-gray-800  p-6 shadow-lg z-20 rounded-xl"
-//         >
-//           <div className="flex justify-between items-center mb-4">
-//             <h2 className="text-3xl font-bold text-[#E0B0FF] p-6">{algorithm}</h2>
-//             <button 
-//             onClick={onClose} 
-//             className="text-gray-800  bg-[#E0B0FF] hover:bg-[#C58CEB] hover:text-white px-3 py-2 rounded ">✕</button>
-//           </div>
-//           <p className="text-l text-gray-300">
-//             {descriptions[algorithm]}
-//           </p>
-//         </motion.div>
-//       )}
-//     </AnimatePresence>
-//   );
-// };
-// export default AlgorithmSidebar;
-
-
-
-
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 
 export type AlgorithmKey =
   | "Bubble Sort"
@@ -54,7 +9,9 @@ export type AlgorithmKey =
   | "Quick Sort"
   | "Heap Sort";
 
-const data: Record<AlgorithmKey, {
+const data: Record<
+AlgorithmKey, 
+{
   overview: string;
   characteristics: string[];
   steps: string[];
@@ -64,8 +21,8 @@ const data: Record<AlgorithmKey, {
     c: string;
     python: string;
   };
-}> = {
-
+}
+> = {
     // BUBBLE SORT
   "Bubble Sort": {
     overview: "Compares adjacent elements and swaps them if they're in the wrong order. Repeats this process until the array is sorted.",
@@ -449,47 +406,70 @@ interface Props {
   algorithm: AlgorithmKey;
   show: boolean;
   onClose: () => void;
+  // isMobile:boolean;
 }
 
-const AlgorithmSidebar: React.FC<Props> = ({ algorithm, show, onClose }) => {
-  const [lang, setLang] = useState<"cpp" | "c" | "python">("cpp");
+const AlgorithmSidebar: React.FC<Props> = ({ 
+  algorithm, 
+  show, 
+  onClose,
 
+ }) => {
+  const [lang, setLang] = useState<"cpp" | "c" | "python">("cpp");
   const algo = data[algorithm];
+
+  const[isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => setIsMobile(window.innerWidth < 768);
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+
 
   return (
     <AnimatePresence>
       {show && algo && (
         <motion.div
-          initial={{ x: -300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -300, opacity: 0 }}
-          transition={{ duration: 0.6 }}
-          className="fixed top-1 left-1 h-[99vh] w-[25%] bg-gray-800 p-6 shadow-lg z-20 rounded-xl overflow-y-auto"
+          initial={{ 
+            opacity: 0, 
+            y: isMobile ? 30 : 0, 
+            x: isMobile ? 0 : -300 
+          }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          exit={{ 
+            opacity: 0, 
+            y: isMobile ? 30 : 0, 
+            x: isMobile ? 0 : -300 
+          }}
+          transition={{ duration: 0.4 }}
+          className={`${
+            isMobile
+              ? "fixed bottom-0 left-0 w-full h-[80vh] rounded-t-xl"
+              : "fixed top-1 left-1 h-[99vh] w-[25%] rounded-xl"
+          } bg-gray-800 p-6 shadow-lg z-50 overflow-y-auto`}
         >
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-[#c6bcf7]">{algorithm}</h2>
+          <div className="flex justify-start items-center mb-4 gap-4">
+            
             <button
               onClick={onClose}
-              className="text-gray-800 bg-[#d4cdfa] hover:bg-[#C58CEB] hover:text-white px-3 py-1 rounded"
+              className="text-gray-800 bg-[#d4cdfa] hover:bg-[#C58CEB] hover:text-white px-3 py-2 rounded"
             >
               ✕
             </button>
+
+            <h2 className="text-3xl font-bold text-[#c6bcf7]">{algorithm}</h2>
           </div>
 
-          <div className="text-gray-300 text-l space-y-4">
-            <div>
-              <h3 className="text-lg font-semibold text-white"></h3>
+          <div className="text-gray-300 text-base space-y-4">
               <p>{algo.overview}</p>
-            </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-white"></h3>
               <ul className="list-disc ml-5">
                 {algo.characteristics.map((c, i) => (
                   <li key={i}>{c}</li>
                 ))}
               </ul>
-            </div>
 
             <div>
               <h3 className="text-lg font-semibold text-white">Steps</h3>
@@ -512,7 +492,7 @@ const AlgorithmSidebar: React.FC<Props> = ({ algorithm, show, onClose }) => {
             <div>
               <h3 className="text-lg font-semibold text-white mb-2">Code</h3>
               <div className="flex space-x-2 mb-2">
-                {["cpp", "c", "python"].map((l) => (
+                {["c++", "c", "python"].map((l) => (
                   <button
                     key={l}
                     onClick={() => setLang(l as "cpp" | "c" | "python")}
