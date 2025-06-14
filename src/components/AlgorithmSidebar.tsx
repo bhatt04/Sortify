@@ -426,6 +426,8 @@ const AlgorithmSidebar: React.FC<Props> = ({
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
+  
+
 
 
   return (
