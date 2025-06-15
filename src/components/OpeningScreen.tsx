@@ -50,33 +50,31 @@ const HomePage = () => {
         SORTING VISUALIZER
       </motion.h1>
 
-<motion.p
-  initial={{ opacity: 0, y: -40 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1.2 }}
-  className="w-full max-w-[90%] mx-auto flex justify-end md:justify-end text-[#1c2c5e] text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-wide mb-4"
-><i>
-  <span> Visualize. </span>
-  <span> Learn. </span>
-  <span> Conquer.</span>
-  </i>
-</motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2 }}
+        className="w-full max-w-[90%] mx-auto flex justify-end md:justify-end text-[#1c2c5e] text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-wide mb-4"
+      >
+        <i>
+          <span> Visualize. </span>
+          <span> Learn. </span>
+          <span> Conquer.</span>
+        </i>
+      </motion.p>
 
-
-
-
-        <p className="text-[#2B3358] text-lg sm:text-xl md:text-2xl mb-6 mt-2">
+      <p className="text-[#2B3358] text-lg sm:text-xl md:text-2xl mb-6 mt-2">
           See your favorite algorithms in action.<br />
           Perfect for students and curious minds!
-        </p>
-        <motion.button
+      </p>
+      <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate("/sort")}
           className="bg-[#5CB270] text-white text-base sm:text-lg md:text-xl px-6 py-3 rounded-xl shadow-md hover:bg-[#A8D26D] transition "
-        >
-          Let's Get Sorting!
-        </motion.button>
+      >
+        Let's Get Sorting!
+      </motion.button>
       </motion.div>
     </div>
   );

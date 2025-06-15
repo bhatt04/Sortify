@@ -25,7 +25,7 @@ const Control: React.FC<ControlProps> = ({
 }) => {
   return (
     <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
-      {/* Algorithm Dropdown */}
+
       <select
         value={algorithm}
         onChange={(e) => setAlgorithm(e.target.value)}
@@ -40,7 +40,6 @@ const Control: React.FC<ControlProps> = ({
         <option value="merge">Merge Sort</option>
       </select>
 
-      {/* Array Size Slider */}
       <label className="text-white">
         Size: {size}
         <input
@@ -54,7 +53,6 @@ const Control: React.FC<ControlProps> = ({
         />
       </label>
 
-      {/* Speed Slider */}
       <label className="text-white">
         Speed: {speed}ms
         <input
@@ -69,7 +67,6 @@ const Control: React.FC<ControlProps> = ({
         />
       </label>
 
-      {/* Action Buttons */}
       <button
         onClick={generateArray}
         disabled={isSorting}

@@ -413,7 +413,6 @@ const AlgorithmSidebar: React.FC<Props> = ({
   algorithm, 
   show, 
   onClose,
-
  }) => {
   const [lang, setLang] = useState<"cpp" | "c" | "python">("cpp");
   const algo = data[algorithm];
@@ -427,8 +426,6 @@ const AlgorithmSidebar: React.FC<Props> = ({
   }, []);
 
   
-
-
 
   return (
     <AnimatePresence>
